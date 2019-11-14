@@ -14,6 +14,7 @@
   const graph = new Springy.Graph();
   $("canvas").springy({graph});
 
+  let initialSubmission = true;
   let currentSubject;
   let isLinking = false;
   const submit = {
@@ -21,6 +22,10 @@
       const label = e.target.value;
       if(label.replace(/\s/g, "") !== ""){
         if(e.key === "Enter"){
+          if(initialSubmission){
+            document.querySelector("canvas").click();
+            initialSubmission = false;
+          }
           nodeInput.focus();
         }else{
           if(currentSubject){
@@ -37,6 +42,11 @@
         const newNode = graph.newNode({label, onNodeClick, ondoubleclick});
         graph.newEdge(currentSubject, newNode);
         e.target.value = "";
+      }else{
+        if(initialSubmission){
+          document.querySelector("canvas").click();
+          initialSubmission = false;
+        }
       }
     },
     link: function(){

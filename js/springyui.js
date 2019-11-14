@@ -238,7 +238,7 @@ jQuery.fn.springy = function(params) {
 				intersection = s2;
 			}
 
-			var stroke = (edge.data.color !== undefined) ? edge.data.color : '#a4a4a4';
+			var stroke = (edge.data.color !== undefined) ? edge.data.color : '#e0e0e0';
 
 			var arrowWidth;
 			var arrowLength;
@@ -346,7 +346,7 @@ jQuery.fn.springy = function(params) {
 					}else if(nodeIsNear){
 						ctx.fillStyle = "#000";
 					}else{
-						ctx.fillStyle = "#5e5e5e";
+						ctx.fillStyle = "#888";
 					}
 				}else{
 					ctx.fillStyle = (node.data.color !== undefined) ? node.data.color : "#000000";
