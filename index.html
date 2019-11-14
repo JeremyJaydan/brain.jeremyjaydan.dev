@@ -1,0 +1,41 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Brain - A simple brainstorming tool</title>
+  <link rel="stylesheet" href="/css/master.css">
+</head>
+<body>
+  <div class="editor">
+    <ul class="usage">
+      <li class="usage__text">Usage:</li>
+      <li class="usage__text">Start typing in the subject input to create a subject.</li>
+      <li class="usage__text">Type & hit enter in the new node input to attach a new node to the selected subject.</li>
+      <li class="usage__text">Single click a node to select that node.</li>
+      <li class="usage__text">Double click a node to delete the node (does not delete child nodes).</li>
+      <li class="usage__text">Select a node then click the link button, then select another node in order to link those two nodes together.</li>
+      <li class="usage__text usage__text--hide">Hide</li>
+    </ul>
+    <div class="output"><canvas></canvas></div>
+    <div class="input">
+      <div class="input__group">
+        <label class="input__label" for="input-subject">Subject</label>
+        <input class="input__field" type="text" id="input-subject" placeholder="Start typing..">
+      </div>
+      <div class="input__group flex-grow">
+        <label class="input__label" for="input-node">New Node</label>
+        <input class="input__field" type="text" id="input-node" placeholder="Press enter to create a new node">
+      </div>
+      <div class="input__group">
+        <label class="input__label" for="button-link">Link</label>
+        <button class="input__button" id="button-link"><-></button>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.0.0-rc1/dist/jquery.min.js"></script>
+  <script src="/js/springyui.js"></script>
+  <script src="/js/springy.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "brain.jcdn.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JeremyJaydan/brain.jcdn.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JeremyJaydan/brain.jcdn.io/issues"
+  },
+  "homepage": "https://github.com/JeremyJaydan/brain.jcdn.io#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
