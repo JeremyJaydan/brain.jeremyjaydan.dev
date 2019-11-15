@@ -60,6 +60,7 @@ body{
   color: #5e5e5e;
   padding: 4px 0;
   font-family: Rubik;
+  user-select: none;
 }
 .input__field,
 .input__button{
