@@ -45,7 +45,7 @@
         e.target.value = "";
         if(currentMode === "R"){
           currentSubject = newNode;
-          subjectInput = label;
+          subjectInput.value = label;
         }
       }else{
         if(initialSubmission){
