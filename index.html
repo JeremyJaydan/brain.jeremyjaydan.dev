@@ -15,10 +15,15 @@
       <li class="usage__text">Single click a node to select that node.</li>
       <li class="usage__text">Double click a node to delete the node (does not delete child nodes).</li>
       <li class="usage__text">Select a node then click the link button, then select another node in order to link those two nodes together.</li>
+      <li class="usage__text">Click the mode button to switch between branch/road modes.</li>
       <li class="usage__text usage__text--hide">Hide</li>
     </ul>
     <div class="output"><canvas></canvas></div>
-    <div class="input">
+    <div class="input mode--B">
+      <div class="input__group">
+        <label class="input__label" for="button-mode">Mode</label>
+        <button class="input__button" id="button-mode">B</button>
+      </div>
       <div class="input__group">
         <label class="input__label" for="input-subject">Subject</label>
         <input class="input__field" type="text" id="input-subject" placeholder="Start typing..">

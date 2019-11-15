@@ -17,6 +17,7 @@
   let initialSubmission = true;
   let currentSubject;
   let isLinking = false;
+  let currentMode;
   const submit = {
     subject: function(e){
       const label = e.target.value;
@@ -42,6 +43,10 @@
         const newNode = graph.newNode({label, onNodeClick, ondoubleclick});
         graph.newEdge(currentSubject, newNode);
         e.target.value = "";
+        if(currentMode === "R"){
+          currentSubject = newNode;
+          subjectInput = label;
+        }
       }else{
         if(initialSubmission){
           document.querySelector("canvas").click();
@@ -52,6 +57,16 @@
     link: function(){
       linkButton.classList.toggle("active");
       isLinking = !isLinking;
+    },
+    mode: function(){
+      if(currentMode === "B"){
+        currentMode = "R";
+      }else{
+        currentMode = "B";
+      }
+      inputContainer.classList.toggle("mode--B");
+      inputContainer.classList.toggle("mode--R");
+      modeButton.innerText = currentMode;
     }
   }
 
@@ -75,10 +90,13 @@
   const subjectInput = document.querySelector("#input-subject");
   const nodeInput = document.querySelector("#input-node");
   const linkButton = document.querySelector("#button-link");
+  const modeButton = document.querySelector("#button-mode");
   subjectInput.addEventListener("keyup", submit.subject);
   nodeInput.addEventListener("keyup", submit.node);
   linkButton.addEventListener("click", submit.link);
+  modeButton.addEventListener("click", submit.mode);
   subjectInput.focus();
+  currentMode = modeButton.innerText;
 
   document.querySelector(".usage__text--hide")
     .addEventListener("click", e => {

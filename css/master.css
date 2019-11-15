@@ -56,6 +56,14 @@ body{
   flex-direction: column;
   padding: 16px 8px;
 }
+.input__field,
+.input__button{
+  border: 1.5px solid transparent;
+}
+.input__field:focus,
+.input__button:focus{
+  border-color: #4967ff;
+}
 .input__label{
   color: #5e5e5e;
   padding: 4px 0;
@@ -64,7 +72,6 @@ body{
 }
 .input__field,
 .input__button{
-  border: none;
   background: #fff;
   outline: #ccc;
   border-radius: 8px;
