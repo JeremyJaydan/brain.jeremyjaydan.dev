@@ -1,3 +1,4 @@
+const graph = new Springy.Graph();
 
 (function(){
 
@@ -11,8 +12,52 @@
     return true;
   }
 
-  const graph = new Springy.Graph();
+  const $storageKey = "brain.jcdn.io";
+  const $storage = {
+    setItem: function(key, value){
+      window.localStorage.setItem($storageKey + "_" + key, value);
+    },
+    getItem: function(key){
+      return window.localStorage.getItem($storageKey + "_" + key);
+    }
+  };
+
   $("canvas").springy({graph});
+
+  const $saveGraph = function(graph){
+    $storage.setItem("nodes", JSON.stringify(graph.nodes));
+    $storage.setItem("edges", JSON.stringify(graph.edges));
+  }
+
+  const $findNode = function(nodeId){
+    return graph.nodes.filter(function(node){
+      return node.id === nodeId
+    });
+  }
+
+  const $loadGraph = function(graph){
+    const nodes = JSON.parse($storage.getItem("nodes") || "[]");
+    const edges = JSON.parse($storage.getItem("edges") || "[]");
+    if(nodes.length > 0 || edges.length > 0){
+      $hideUsage();
+    }
+    $for(nodes, function(node, {next}){
+      graph.newNode({
+        label: node.data.label,
+        onNodeClick,
+        ondoubleclick
+      })
+      next();
+    }, {interval: 100})
+    .then(function(){
+      $for(edges, function(edge, {next}){
+        const e1 = $findNode(edge.source.id)[0];
+        const e2 = $findNode(edge.target.id)[0];
+        graph.newEdge(e1, e2);
+        next();
+      }, {interval: 50})
+    });
+  }
 
   let initialSubmission = true;
   let currentSubject;
@@ -26,6 +71,7 @@
           if(initialSubmission){
             document.querySelector("canvas").click();
             initialSubmission = false;
+            $saveGraph(graph);
           }
           nodeInput.focus();
         }else{
@@ -33,6 +79,7 @@
             currentSubject.data.label = label;
           }else{
             currentSubject = graph.newNode({label, onNodeClick, ondoubleclick});
+            $saveGraph(graph);
           }
         }
       }
@@ -41,7 +88,9 @@
       const label = e.target.value;
       if(e.key === "Enter" && currentSubject && label.replace(/\s/g, "") !== ""){
         const newNode = graph.newNode({label, onNodeClick, ondoubleclick});
+        console.log({currentSubject, newNode});
         graph.newEdge(currentSubject, newNode);
+        $saveGraph(graph);
         e.target.value = "";
         if(currentMode === "R"){
           currentSubject = newNode;
@@ -73,6 +122,7 @@
   function onNodeClick(node){
     if(isLinking && currentSubject){
       graph.newEdge(currentSubject, node);
+      $saveGraph(graph);
       submit.link();
     }
     currentSubject = node;
@@ -82,6 +132,7 @@
 
   function ondoubleclick(node){
     graph.removeNode(node);
+    $saveGraph(graph);
     currentSubject = null;
     subjectInput.value = "";
     subjectInput.focus();
@@ -98,10 +149,11 @@
   subjectInput.focus();
   currentMode = modeButton.innerText;
 
-  document.querySelector(".usage__text--hide")
-    .addEventListener("click", e => {
-      e.target.parentNode.remove();
-    })
-  ;
+  const $usageContainer = document.querySelector(".js--usage-container");
+  const $hideUsage = function(){
+    $usageContainer.remove();
+  };
+  document.querySelector(".usage__text--hide").addEventListener("click", $hideUsage);
+  $loadGraph(graph);
 
 })();
