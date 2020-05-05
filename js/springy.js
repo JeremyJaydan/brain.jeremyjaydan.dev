@@ -109,7 +109,6 @@
 		if (!(edge.source.id in this.adjacency)) {
 			this.adjacency[edge.source.id] = {};
 		}
-		console.log("EDGE: ", edge)
 		if (!(edge.target.id in this.adjacency[edge.source.id])) {
 			this.adjacency[edge.source.id][edge.target.id] = [];
 		}

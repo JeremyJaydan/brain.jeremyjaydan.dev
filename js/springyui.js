@@ -344,7 +344,7 @@ jQuery.fn.springy = function(params) {
 					if(nodeSelected){
 						ctx.fillStyle = "#4967ff";
 					}else if(nodeIsNear){
-						ctx.fillStyle = "#000";
+						ctx.fillStyle = "#888";
 					}else{
 						ctx.fillStyle = "#888";
 					}
